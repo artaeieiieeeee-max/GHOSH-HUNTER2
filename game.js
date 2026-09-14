@@ -1,5 +1,5 @@
 // GANTI DENGAN URL GOOGLE APPS SCRIPT ANDA
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXX/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFcEd1ZYBs2bg88-xOVyLaInSbTYX3cTtC6k08XWlbKmNr1yczJcio57KoTW2B134qBQ/exec';
 
 function toggleForm(type) {
     const loginForm = document.getElementById('login-form');
