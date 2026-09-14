@@ -16,7 +16,7 @@ body {
     overflow: hidden;
 }
 
-/* Background Radial Glow */
+/* Background Effect Glow */
 .background-glow {
     position: absolute;
     width: 600px;
@@ -96,12 +96,17 @@ input:focus {
     transform: scale(0.98);
 }
 
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .btn-primary {
     background-color: #6c5ce7;
     color: #ffffff;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
     background-color: #5b4bc4;
 }
 
@@ -110,7 +115,7 @@ input:focus {
     color: #a2a5c8;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
     background-color: #252849;
     color: #ffffff;
 }
@@ -122,10 +127,19 @@ input:focus {
 .message {
     margin-top: 15px;
     font-size: 13px;
-    color: #00b894;
+    min-height: 18px;
 }
 
-/* Leaderboard Table Styles */
+/* Style Watermark Credit */
+.footer-credit {
+    margin-top: 20px;
+    font-size: 11px;
+    color: #6c6e8e;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Tabel Leaderboard */
 .leaderboard-table-container {
     max-height: 250px;
     overflow-y: auto;
