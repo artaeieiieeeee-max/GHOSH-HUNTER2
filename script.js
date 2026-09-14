@@ -1,5 +1,30 @@
-// ISI DENGAN URL GOOGLE APPS SCRIPT ANDA
+// GANTI DENGAN URL GOOGLE APPS SCRIPT ANDA
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFcEd1ZYBs2bg88-xOVyLaInSbTYX3cTtC6k08XWlbKmNr1yczJcio57KoTW2B134qBQ/exec";
+
+// Fungsi Helper JSONP untuk Bypass Blokir CORS Browser
+function jsonpRequest(url, params) {
+    return new Promise((resolve, reject) => {
+        const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+        window[callbackName] = function(data) {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            resolve(data);
+        };
+
+        const queryString = Object.keys(params)
+            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+            .join('&');
+
+        const script = document.createElement('script');
+        script.src = `${url}?${queryString}&callback=${callbackName}`;
+        script.onerror = () => {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            reject(new Error('Gagal terhubung ke Google Sheets'));
+        };
+        document.body.appendChild(script);
+    });
+}
 
 function switchForm(type) {
     const loginForm = document.getElementById('login-form');
@@ -16,7 +41,7 @@ function switchForm(type) {
     }
 }
 
-// Handler Pendaftaran Akun
+// Handler Register
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const username = document.getElementById('reg-username').value.trim();
@@ -31,9 +56,11 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     btnRegister.disabled = true;
 
     try {
-        const query = `?action=register&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-        const response = await fetch(SCRIPT_URL + query);
-        const data = await response.json();
+        const data = await jsonpRequest(SCRIPT_URL, {
+            action: 'register',
+            username: username,
+            password: password
+        });
 
         if (data.status === 'success') {
             message.style.color = '#00b894';
@@ -67,9 +94,11 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     btnLogin.disabled = true;
 
     try {
-        const query = `?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-        const response = await fetch(SCRIPT_URL + query);
-        const data = await response.json();
+        const data = await jsonpRequest(SCRIPT_URL, {
+            action: 'login',
+            username: username,
+            password: password
+        });
 
         if (data.status === 'success') {
             message.innerText = '';
@@ -98,8 +127,7 @@ async function loadLeaderboard() {
     tbody.innerHTML = '<tr><td colspan="3">Memuat leaderboard...</td></tr>';
 
     try {
-        const response = await fetch(`${SCRIPT_URL}?action=getLeaderboard`);
-        const data = await response.json();
+        const data = await jsonpRequest(SCRIPT_URL, { action: 'getLeaderboard' });
 
         tbody.innerHTML = '';
         if (!data || data.length === 0) {
