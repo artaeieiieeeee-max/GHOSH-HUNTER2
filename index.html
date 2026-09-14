@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghost Hunter</title>
+    <title>Ghost Hunter - 50 Levels</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
     <div class="card-container" id="auth-card">
         <div class="logo">👻</div>
         <h1 class="title">GHOST HUNTER</h1>
-        <p class="subtitle">Hunt the ghosts. Survive the night.</p>
+        <p class="subtitle">Hunt the ghosts. Survive 50 levels!</p>
 
         <!-- Form Login -->
         <form id="login-form">
@@ -23,7 +23,7 @@
             <button type="button" class="btn btn-secondary" onclick="switchForm('register')">DAFTAR AKUN</button>
         </form>
 
-        <!-- Form Register (Sembunyi secara default) -->
+        <!-- Form Register -->
         <form id="register-form" class="hidden">
             <input type="text" id="reg-username" placeholder="Username Baru" required autocomplete="off">
             <input type="password" id="reg-password" placeholder="Password Baru" required>
@@ -32,12 +32,10 @@
         </form>
 
         <div id="auth-message" class="message"></div>
-
-        <!-- Watermark / Credit Designer -->
         <div class="footer-credit">Design by Firman XI RPL</div>
     </div>
 
-    <!-- Panel Leaderboard (Ditampilkan setelah login berhasil) -->
+    <!-- Panel Menu Utama & Leaderboard -->
     <div class="card-container hidden" id="dashboard-card">
         <div class="logo">👻</div>
         <h1 class="title">LEADERBOARD</h1>
@@ -49,7 +47,7 @@
                     <tr>
                         <th>#</th>
                         <th>Username</th>
-                        <th>Score</th>
+                        <th>High Score</th>
                     </tr>
                 </thead>
                 <tbody id="leaderboard-body">
@@ -60,9 +58,28 @@
             </table>
         </div>
 
-        <button class="btn btn-secondary" onclick="logout()" style="margin-top: 15px;">LOGOUT</button>
+        <button class="btn btn-primary" onclick="startGame()">MULAIMAIN (LEVEL 1-50)</button>
+        <button class="btn btn-secondary" onclick="logout()" style="margin-top: 10px;">LOGOUT</button>
+        <div class="footer-credit">Design by Firman XI RPL</div>
+    </div>
 
-        <!-- Watermark / Credit Designer -->
+    <!-- Area Permainan Game (50 Level) -->
+    <div class="card-container game-card hidden" id="game-card">
+        <div class="game-header">
+            <div>Level: <span id="game-level">1</span>/50</div>
+            <div>Score: <span id="game-score">0</span></div>
+            <div class="lives-container">Nyawa: <span id="game-lives">❤️❤️❤️❤️❤️</span></div>
+        </div>
+        <div class="game-info">
+            <span id="target-info">Tangkap 3 hantu!</span> | Waktu: <span id="game-timer">10</span>s
+        </div>
+
+        <!-- Arena Tempat Hantu Muncul -->
+        <div class="game-arena" id="game-arena">
+            <!-- Hantu dan rintangan akan di-generate via JS -->
+        </div>
+
+        <button class="btn btn-secondary" onclick="exitGame()" style="margin-top: 15px;">MENYERAH</button>
         <div class="footer-credit">Design by Firman XI RPL</div>
     </div>
 
