@@ -1,0 +1,531 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #05050d;
+    color: white;
+
+    touch-action: none;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================
+   SCREEN
+========================================= */
+
+.screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+#loginScreen {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #29265d 0%,
+            #0d0c20 45%,
+            #030308 100%
+        );
+}
+
+.login-card {
+    width: min(90%, 400px);
+
+    padding: 32px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    background:
+        rgba(15, 15, 35, 0.94);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.45);
+
+    backdrop-filter:
+        blur(15px);
+}
+
+.ghost-logo {
+    font-size: 65px;
+
+    animation:
+        ghostFloat 2s
+        ease-in-out
+        infinite;
+}
+
+@keyframes ghostFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.login-card h1 {
+    margin-top: 5px;
+
+    font-size: 30px;
+
+    letter-spacing: 3px;
+}
+
+.subtitle {
+    margin: 10px 0 25px;
+
+    color: #aaa9c5;
+
+    font-size: 14px;
+}
+
+.login-card input {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid
+        rgba(255,255,255,0.08);
+
+    outline: none;
+
+    border-radius: 12px;
+
+    background: #202038;
+
+    color: white;
+}
+
+.login-card input::placeholder {
+    color: #8887a5;
+}
+
+.login-card input:focus {
+    border-color: #7565ff;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(117,101,255,0.15);
+}
+
+.login-card button {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7866ff,
+            #5440d8
+        );
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.login-card button:active {
+    transform: scale(0.98);
+}
+
+.secondary-btn {
+    background: #292940 !important;
+
+    margin-top: 10px !important;
+}
+
+#loginMessage {
+    min-height: 22px;
+
+    margin-top: 15px;
+
+    color: #ff8d8d;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   GAME CANVAS
+========================================= */
+
+#gameCanvas {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    background: #070713;
+}
+
+
+/* =========================================
+   HUD
+========================================= */
+
+#hud {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: flex-start;
+
+    padding: 12px;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.hud-group {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.hud-box {
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+        7px 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(10,10,25,0.78);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    backdrop-filter:
+        blur(10px);
+
+    font-size: 12px;
+}
+
+.hud-box b {
+    margin-left: 3px;
+
+    font-size: 15px;
+}
+
+.exit-btn {
+    width: auto !important;
+
+    padding:
+        8px 12px !important;
+
+    margin: 0 !important;
+
+    pointer-events: auto;
+
+    background: #9d3636 !important;
+}
+
+.center-hud {
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+}
+
+
+/* =========================================
+   GAME OVER
+========================================= */
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 50;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        rgba(0,0,0,0.76);
+}
+
+.gameover-card {
+    width: min(90%, 350px);
+
+    padding: 30px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    background: #121226;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.5);
+}
+
+.gameover-icon {
+    font-size: 50px;
+
+    margin-bottom: 10px;
+}
+
+.gameover-card h2 {
+    font-size: 32px;
+
+    margin-bottom: 18px;
+}
+
+.gameover-card p {
+    margin: 9px;
+
+    color: #a6a5bd;
+}
+
+.gameover-card strong {
+    display: inline-block;
+
+    min-width: 45px;
+
+    color: white;
+}
+
+#restartBtn {
+    margin-top: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7866ff,
+            #5440d8
+        );
+}
+
+
+/* =========================================
+   MOBILE CONTROLS
+========================================= */
+
+#mobileControls {
+    position: absolute;
+
+    left: 0;
+    bottom: 10px;
+
+    width: 100%;
+
+    padding:
+        10px 20px;
+
+    display: none;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-end;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+.movement {
+    text-align: center;
+}
+
+.control {
+    width: 55px;
+    height: 55px;
+
+    margin: 2px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(80,70,150,0.72);
+
+    color: white;
+
+    font-size: 19px;
+
+    pointer-events: auto;
+}
+
+.control:active,
+.shoot-button:active {
+    transform: scale(0.92);
+
+    background:
+        rgba(120,105,220,0.9);
+}
+
+.shoot-button {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(110,90,220,0.8);
+
+    color: white;
+
+    font-size: 30px;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    #mobileControls {
+        display: flex;
+    }
+
+    #hud {
+        padding: 7px;
+    }
+
+    .hud-box {
+        min-height: 32px;
+
+        padding:
+            5px 7px;
+
+        font-size: 10px;
+    }
+
+    .hud-box b {
+        font-size: 12px;
+    }
+
+    .center-hud {
+        gap: 4px;
+    }
+
+    .login-card {
+        padding: 25px;
+    }
+
+    .login-card h1 {
+        font-size: 25px;
+    }
+}
+
+
+/* =========================================
+   SMALL SCREEN
+========================================= */
+
+@media (max-height: 500px) {
+
+    #mobileControls {
+        bottom: 2px;
+    }
+
+    .control {
+        width: 45px;
+        height: 45px;
+    }
+
+    .shoot-button {
+        width: 60px;
+        height: 60px;
+    }
+}
