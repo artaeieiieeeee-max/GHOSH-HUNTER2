@@ -1,4 +1,4 @@
-// ISI URL GOOGLE APPS SCRIPT ANDA DI SINI
+// ISI DENGAN URL GOOGLE APPS SCRIPT ANDA
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFcEd1ZYBs2bg88-xOVyLaInSbTYX3cTtC6k08XWlbKmNr1yczJcio57KoTW2B134qBQ/exec";
 
 function switchForm(type) {
@@ -31,16 +31,8 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     btnRegister.disabled = true;
 
     try {
-        const response = await fetch(SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({
-                action: 'register',
-                username: username,
-                password: password
-            })
-        });
-
+        const query = `?action=register&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+        const response = await fetch(SCRIPT_URL + query);
         const data = await response.json();
 
         if (data.status === 'success') {
@@ -54,7 +46,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         }
     } catch (err) {
         message.style.color = '#ff7675';
-        message.innerText = 'Terjadi kesalahan koneksi ke server.';
+        message.innerText = 'Gagal terhubung ke Google Sheets.';
     } finally {
         btnRegister.disabled = false;
     }
@@ -75,16 +67,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     btnLogin.disabled = true;
 
     try {
-        const response = await fetch(SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({
-                action: 'login',
-                username: username,
-                password: password
-            })
-        });
-
+        const query = `?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+        const response = await fetch(SCRIPT_URL + query);
         const data = await response.json();
 
         if (data.status === 'success') {
@@ -96,7 +80,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         }
     } catch (err) {
         message.style.color = '#ff7675';
-        message.innerText = 'Terjadi kesalahan koneksi ke server.';
+        message.innerText = 'Gagal terhubung ke Google Sheets.';
     } finally {
         btnLogin.disabled = false;
     }
@@ -118,7 +102,7 @@ async function loadLeaderboard() {
         const data = await response.json();
 
         tbody.innerHTML = '';
-        if (data.length === 0) {
+        if (!data || data.length === 0) {
             tbody.innerHTML = '<tr><td colspan="3">Belum ada data pemain.</td></tr>';
             return;
         }
