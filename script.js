@@ -1,5 +1,5 @@
 // GANTI DENGAN URL GOOGLE APPS SCRIPT ANDA
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzwy5-sfPiJgFHuRgLanUKjs9vZThqozEkLokkVaGWuylkWXUM34TBNDv9qnTL6mYluMg/execA";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzx_M4f9mOJ6Y7Ba_0T-T-Vwy0CLfo1fGOiu6LfClVhz9wQrb8o19CrgurMh_9hl3V0dA/exec";
 
 let currentUser = "";
 let currentScore = 0;
