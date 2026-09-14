@@ -31,7 +31,6 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     btnRegister.disabled = true;
 
     try {
-        // Menggunakan URLSearchParams agar aman dari CORS
         const response = await fetch(SCRIPT_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
