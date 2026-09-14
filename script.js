@@ -1,5 +1,5 @@
 // GANTI DENGAN URL GOOGLE APPS SCRIPT ANDA
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFcEd1ZYBs2bg88-xOVyLaInSbTYX3cTtC6k08XWlbKmNr1yczJcio57KoTW2B134qBQ/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKdR5R4eexjBE02PRHfxwdvrZM2JUcFke_HXcwr_c7hqg7iigpfLZPqBo1e0myw5THgA/exec";
 
 // Fungsi Helper JSONP untuk Bypass Blokir CORS Browser
 function jsonpRequest(url, params) {
